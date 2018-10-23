@@ -8,8 +8,10 @@ import android.support.v7.widget.RecyclerView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Spinner
+import com.google.gson.Gson
 import io.github.fatimazza.footballclub.R.color.colorAccent
 import io.github.fatimazza.footballclub.model.Team
+import io.github.fatimazza.footballclub.networking.ApiRepository
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
@@ -21,10 +23,27 @@ class MainActivity : AppCompatActivity(), MainView {
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var spinner: Spinner
 
+    private var teams: MutableList<Team> = mutableListOf()
+    private lateinit var presenter: MainPresenter
+    private lateinit var adapter: MainAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         MainActivityUI().setContentView(this)
+        initAdapter()
+        initPresenter()
+    }
+
+    private fun initAdapter() {
+        adapter = MainAdapter(teams)
+        listTeam.adapter = adapter
+    }
+
+    private fun initPresenter() {
+        val request = ApiRepository()
+        val gson = Gson()
+        presenter = MainPresenter(this, request, gson)
     }
 
     class MainActivityUI: AnkoComponent<MainActivity> {
