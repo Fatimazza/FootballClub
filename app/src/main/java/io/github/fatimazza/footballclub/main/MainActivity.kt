@@ -14,6 +14,8 @@ import io.github.fatimazza.footballclub.R
 import io.github.fatimazza.footballclub.R.color.colorAccent
 import io.github.fatimazza.footballclub.model.Team
 import io.github.fatimazza.footballclub.networking.ApiRepository
+import io.github.fatimazza.footballclub.utils.invisible
+import io.github.fatimazza.footballclub.utils.visible
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
@@ -92,11 +94,11 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun showLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        progressBar.visible()
     }
 
     override fun hideLoading() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        progressBar.invisible()
     }
 
     override fun showTeamList(data: List<Team>) {
