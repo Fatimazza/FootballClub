@@ -3,10 +3,10 @@ package io.github.fatimazza.footballclub.main
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import io.github.fatimazza.footballclub.R
 import io.github.fatimazza.footballclub.model.Team
-import org.jetbrains.anko.AnkoComponent
-import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.linearLayout
+import org.jetbrains.anko.*
 
 class MainAdapter(private val teams: List<Team>)
     : RecyclerView.Adapter<TeamViewHolder>() {
@@ -28,7 +28,25 @@ class MainAdapter(private val teams: List<Team>)
 class TeamUI: AnkoComponent<ViewGroup> {
     override fun createView(ui: AnkoContext<ViewGroup>): View {
         return with(ui){
-            linearLayout {  }
+            linearLayout {
+                lparams(width = matchParent, height = wrapContent)
+                padding = dip(16)
+                orientation = LinearLayout.HORIZONTAL
+
+                imageView {
+                    id = R.id.team_badge
+                }.lparams{
+                    height = dip(50)
+                    width = dip(50)
+                }
+
+                textView {
+                    id = R.id.team_name
+                    textSize = 16f
+                }.lparams{
+                    margin = dip(15)
+                }
+            }
         }
     }
 }
