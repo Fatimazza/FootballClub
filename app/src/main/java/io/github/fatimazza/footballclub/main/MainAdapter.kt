@@ -16,16 +16,16 @@ import org.jetbrains.anko.*
 class MainAdapter(private val teams: List<Team>)
     : RecyclerView.Adapter<TeamViewHolder>() {
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): TeamViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
+        return TeamViewHolder(TeamUI().createView(
+                AnkoContext.create(parent.context, parent)
+        ))
     }
 
-    override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getItemCount(): Int = teams.size
 
-    override fun onBindViewHolder(p0: TeamViewHolder, p1: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
+        holder.bindItem(teams[position])
     }
 
 }
