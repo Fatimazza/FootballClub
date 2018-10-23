@@ -2,10 +2,8 @@ package io.github.fatimazza.footballclub
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import org.jetbrains.anko.AnkoComponent
-import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.setContentView
-import org.jetbrains.anko.verticalLayout
+import android.widget.LinearLayout
+import org.jetbrains.anko.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +15,10 @@ class MainActivity : AppCompatActivity() {
 
     class MainActivityUI: AnkoComponent<MainActivity> {
         override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
-            verticalLayout {
+            linearLayout {
+                lparams(width = matchParent, height = wrapContent)
+                orientation = LinearLayout.VERTICAL
+                padding = dip(16)
 
             }
         }
