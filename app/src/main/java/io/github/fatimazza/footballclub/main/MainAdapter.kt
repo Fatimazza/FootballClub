@@ -3,8 +3,13 @@ package io.github.fatimazza.footballclub.main
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
+import com.squareup.picasso.Picasso
 import io.github.fatimazza.footballclub.R
+import io.github.fatimazza.footballclub.R.id.team_badge
+import io.github.fatimazza.footballclub.R.id.team_name
 import io.github.fatimazza.footballclub.model.Team
 import org.jetbrains.anko.*
 
@@ -53,8 +58,12 @@ class TeamUI: AnkoComponent<ViewGroup> {
 
 class TeamViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
+    private val teamBadge: ImageView = view.find(team_badge)
+    private val teamName: TextView = view.find(team_name)
+
     fun bindItem(teams: Team) {
-        
+        Picasso.get().load(teams.teamBadge).into(teamBadge)
+        teamName.text = teams.teamName
     }
 
 }
