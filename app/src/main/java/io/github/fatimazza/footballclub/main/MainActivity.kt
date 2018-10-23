@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Spinner
 import com.google.gson.Gson
+import io.github.fatimazza.footballclub.R
 import io.github.fatimazza.footballclub.R.color.colorAccent
 import io.github.fatimazza.footballclub.model.Team
 import io.github.fatimazza.footballclub.networking.ApiRepository
@@ -27,12 +29,22 @@ class MainActivity : AppCompatActivity(), MainView {
     private lateinit var presenter: MainPresenter
     private lateinit var adapter: MainAdapter
 
+    private lateinit var leagueName: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         MainActivityUI().setContentView(this)
+
+        initSpinner()
         initAdapter()
         initPresenter()
+    }
+
+    private fun initSpinner() {
+        val spinnerItems = resources.getStringArray(R.array.league)
+        val spinnerAdapter = ArrayAdapter(ctx, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+        spinner.adapter = spinnerAdapter
     }
 
     private fun initAdapter() {
