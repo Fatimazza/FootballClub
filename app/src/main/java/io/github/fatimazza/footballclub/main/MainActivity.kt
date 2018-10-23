@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.widget.ArrayAdapter
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.Spinner
+import android.view.View
+import android.widget.*
 import com.google.gson.Gson
 import io.github.fatimazza.footballclub.R
 import io.github.fatimazza.footballclub.R.color.colorAccent
@@ -18,6 +16,7 @@ import io.github.fatimazza.footballclub.utils.invisible
 import io.github.fatimazza.footballclub.utils.visible
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
+import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 class MainActivity : AppCompatActivity(), MainView {
@@ -41,6 +40,7 @@ class MainActivity : AppCompatActivity(), MainView {
         initSpinner()
         initAdapter()
         initPresenter()
+        getDataOnSpinnerClicked()
     }
 
     private fun initSpinner() {
@@ -58,6 +58,19 @@ class MainActivity : AppCompatActivity(), MainView {
         val request = ApiRepository()
         val gson = Gson()
         presenter = MainPresenter(this, request, gson)
+    }
+
+    private fun getDataOnSpinnerClicked() {
+        spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+
+            override fun onItemSelected(
+                    parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                        leagueName = spinner.selectedItem.toString()
+                        presenter.getTeamList(leagueName)
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) { }
+
+        }
     }
 
     class MainActivityUI: AnkoComponent<MainActivity> {
