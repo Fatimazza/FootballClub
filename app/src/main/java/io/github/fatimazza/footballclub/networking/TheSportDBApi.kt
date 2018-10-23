@@ -1,6 +1,7 @@
-package io.github.fatimazza.footballclub
+package io.github.fatimazza.footballclub.networking
 
 import android.net.Uri
+import io.github.fatimazza.footballclub.BuildConfig
 
 object TheSportDBApi {
 

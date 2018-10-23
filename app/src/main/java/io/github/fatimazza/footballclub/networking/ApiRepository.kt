@@ -1,4 +1,4 @@
-package io.github.fatimazza.footballclub;
+package io.github.fatimazza.footballclub.networking;
 
 import java.net.URL
 

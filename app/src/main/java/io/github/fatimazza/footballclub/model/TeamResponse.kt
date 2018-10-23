@@ -1,4 +1,4 @@
-package io.github.fatimazza.footballclub
+package io.github.fatimazza.footballclub.model
 
 data class TeamResponse(
 
