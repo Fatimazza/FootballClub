@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity(), MainView {
         initAdapter()
         initPresenter()
         getDataOnSpinnerClicked()
+        refreshSwipeRefresh()
     }
 
     private fun initSpinner() {
@@ -70,6 +71,12 @@ class MainActivity : AppCompatActivity(), MainView {
             }
             override fun onNothingSelected(parent: AdapterView<*>) { }
 
+        }
+    }
+
+    private fun refreshSwipeRefresh() {
+        swipeRefresh.onRefresh {
+            presenter.getTeamList(leagueName)
         }
     }
 
@@ -115,7 +122,10 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun showTeamList(data: List<Team>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        swipeRefresh.isRefreshing = false
+        teams.clear()
+        teams.addAll(data)
+        adapter.notifyDataSetChanged()
     }
 
 }
