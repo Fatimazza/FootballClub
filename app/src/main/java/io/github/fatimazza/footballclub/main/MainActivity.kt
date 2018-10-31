@@ -13,6 +13,7 @@ import io.github.fatimazza.footballclub.R.color.colorAccent
 import io.github.fatimazza.footballclub.teamsfragment.TeamsView
 import io.github.fatimazza.footballclub.model.Team
 import io.github.fatimazza.footballclub.networking.ApiRepository
+import io.github.fatimazza.footballclub.teamsfragment.TeamsAdapter
 import io.github.fatimazza.footballclub.utils.invisible
 import io.github.fatimazza.footballclub.utils.visible
 import org.jetbrains.anko.*
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity(), TeamsView {
 
     private var teams: MutableList<Team> = mutableListOf()
     private lateinit var presenter: MainPresenter
-    private lateinit var adapter: MainAdapter
+    private lateinit var adapter: TeamsAdapter
 
     private lateinit var leagueName: String
 
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity(), TeamsView {
     }
 
     private fun initAdapter() {
-        adapter = MainAdapter(teams)
+        adapter = TeamsAdapter(teams)
         listTeam.adapter = adapter
     }
 

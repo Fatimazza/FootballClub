@@ -1,4 +1,4 @@
-package io.github.fatimazza.footballclub.main
+package io.github.fatimazza.footballclub.teamsfragment
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -13,7 +13,7 @@ import io.github.fatimazza.footballclub.R.id.team_name
 import io.github.fatimazza.footballclub.model.Team
 import org.jetbrains.anko.*
 
-class MainAdapter(private val teams: List<Team>)
+class TeamsAdapter(private val teams: List<Team>)
     : RecyclerView.Adapter<TeamViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {

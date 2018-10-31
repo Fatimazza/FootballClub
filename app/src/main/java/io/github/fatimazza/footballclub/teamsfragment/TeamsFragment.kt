@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.*
 import com.google.gson.Gson
 import io.github.fatimazza.footballclub.R
-import io.github.fatimazza.footballclub.main.MainAdapter
 import io.github.fatimazza.footballclub.main.MainPresenter
 import io.github.fatimazza.footballclub.model.Team
 import io.github.fatimazza.footballclub.networking.ApiRepository
@@ -33,7 +32,7 @@ class TeamsFragment: Fragment(), TeamsView {
 
     private var teams: MutableList<Team> = mutableListOf()
     private lateinit var presenter: MainPresenter
-    private lateinit var adapter: MainAdapter
+    private lateinit var adapter: TeamsAdapter
 
     private lateinit var leagueName: String
 
@@ -88,7 +87,7 @@ class TeamsFragment: Fragment(), TeamsView {
     }
 
     private fun initAdapter() {
-        adapter = MainAdapter(teams)
+        adapter = TeamsAdapter(teams)
         listTeam.adapter = adapter
     }
 
