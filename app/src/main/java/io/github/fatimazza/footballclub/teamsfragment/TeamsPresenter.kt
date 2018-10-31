@@ -1,16 +1,15 @@
-package io.github.fatimazza.footballclub.main
+package io.github.fatimazza.footballclub.teamsfragment
 
 import com.google.gson.Gson
-import io.github.fatimazza.footballclub.teamsfragment.TeamsView
 import io.github.fatimazza.footballclub.model.TeamResponse
 import io.github.fatimazza.footballclub.networking.ApiRepository
 import io.github.fatimazza.footballclub.networking.TheSportDBApi
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class MainPresenter(private val view: TeamsView,
-                    private val apiRepository: ApiRepository,
-                    private val gson: Gson) {
+class TeamsPresenter(private val view: TeamsView,
+                     private val apiRepository: ApiRepository,
+                     private val gson: Gson) {
 
     fun getTeamList(league: String?) {
         view.showLoading()

@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.*
 import com.google.gson.Gson
 import io.github.fatimazza.footballclub.R
-import io.github.fatimazza.footballclub.main.MainPresenter
 import io.github.fatimazza.footballclub.model.Team
 import io.github.fatimazza.footballclub.networking.ApiRepository
 import io.github.fatimazza.footballclub.utils.invisible
@@ -31,7 +30,7 @@ class TeamsFragment: Fragment(), TeamsView {
     private lateinit var spinner: Spinner
 
     private var teams: MutableList<Team> = mutableListOf()
-    private lateinit var presenter: MainPresenter
+    private lateinit var presenter: TeamsPresenter
     private lateinit var adapter: TeamsAdapter
 
     private lateinit var leagueName: String
@@ -94,7 +93,7 @@ class TeamsFragment: Fragment(), TeamsView {
     private fun initPresenter() {
         val request = ApiRepository()
         val gson = Gson()
-        presenter = MainPresenter(this, request, gson)
+        presenter = TeamsPresenter(this, request, gson)
     }
 
     private fun getDataOnSpinnerClicked() {

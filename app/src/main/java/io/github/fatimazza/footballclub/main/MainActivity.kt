@@ -14,6 +14,7 @@ import io.github.fatimazza.footballclub.teamsfragment.TeamsView
 import io.github.fatimazza.footballclub.model.Team
 import io.github.fatimazza.footballclub.networking.ApiRepository
 import io.github.fatimazza.footballclub.teamsfragment.TeamsAdapter
+import io.github.fatimazza.footballclub.teamsfragment.TeamsPresenter
 import io.github.fatimazza.footballclub.utils.invisible
 import io.github.fatimazza.footballclub.utils.visible
 import org.jetbrains.anko.*
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity(), TeamsView {
     private lateinit var spinner: Spinner
 
     private var teams: MutableList<Team> = mutableListOf()
-    private lateinit var presenter: MainPresenter
+    private lateinit var presenter: TeamsPresenter
     private lateinit var adapter: TeamsAdapter
 
     private lateinit var leagueName: String
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity(), TeamsView {
     private fun initPresenter() {
         val request = ApiRepository()
         val gson = Gson()
-        presenter = MainPresenter(this, request, gson)
+        presenter = TeamsPresenter(this, request, gson)
     }
 
     private fun getDataOnSpinnerClicked() {
