@@ -13,17 +13,25 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Spinner
 import io.github.fatimazza.footballclub.R
+import io.github.fatimazza.footballclub.main.MainAdapter
+import io.github.fatimazza.footballclub.model.Team
+import io.github.fatimazza.footballclub.utils.invisible
+import io.github.fatimazza.footballclub.utils.visible
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
-class TeamsFragment: Fragment() {
+class TeamsFragment: Fragment(), TeamsView {
 
     private lateinit var listTeam: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var spinner: Spinner
+
+    private var teams: MutableList<Team> = mutableListOf()
+
+    private lateinit var adapter: MainAdapter
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -61,5 +69,20 @@ class TeamsFragment: Fragment() {
                 }
             }
         }
+    }
+
+    override fun showLoading() {
+        progressBar.visible()
+    }
+
+    override fun hideLoading() {
+        progressBar.invisible()
+    }
+
+    override fun showTeamList(data: List<Team>) {
+        swipeRefresh.isRefreshing = false
+        teams.clear()
+        teams.addAll(data)
+        adapter.notifyDataSetChanged()
     }
 }
