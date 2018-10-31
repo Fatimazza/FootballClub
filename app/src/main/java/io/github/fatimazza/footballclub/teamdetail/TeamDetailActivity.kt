@@ -44,9 +44,15 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
 
         TeamDetailUI().setContentView(this)
         setupActionBar()
+        getIntentExtra()
 
         initPresenter()
         requestDataTeamDetail()
+    }
+
+    private fun getIntentExtra() {
+        val intent = intent
+        id = intent.getStringExtra(getString(R.string.intent_id))
     }
 
     private fun setupActionBar() {
