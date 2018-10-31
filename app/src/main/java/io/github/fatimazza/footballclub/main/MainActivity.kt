@@ -10,6 +10,7 @@ import android.widget.*
 import com.google.gson.Gson
 import io.github.fatimazza.footballclub.R
 import io.github.fatimazza.footballclub.R.color.colorAccent
+import io.github.fatimazza.footballclub.teamsfragment.TeamsView
 import io.github.fatimazza.footballclub.model.Team
 import io.github.fatimazza.footballclub.networking.ApiRepository
 import io.github.fatimazza.footballclub.utils.invisible

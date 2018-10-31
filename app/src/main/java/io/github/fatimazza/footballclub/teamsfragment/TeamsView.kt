@@ -1,4 +1,4 @@
-package io.github.fatimazza.footballclub.main
+package io.github.fatimazza.footballclub.teamsfragment
 
 import io.github.fatimazza.footballclub.model.Team
 

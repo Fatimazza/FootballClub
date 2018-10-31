@@ -1,6 +1,7 @@
 package io.github.fatimazza.footballclub.main
 
 import com.google.gson.Gson
+import io.github.fatimazza.footballclub.teamsfragment.TeamsView
 import io.github.fatimazza.footballclub.model.TeamResponse
 import io.github.fatimazza.footballclub.networking.ApiRepository
 import io.github.fatimazza.footballclub.networking.TheSportDBApi

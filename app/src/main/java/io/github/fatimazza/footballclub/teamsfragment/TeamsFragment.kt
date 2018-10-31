@@ -1,4 +1,4 @@
-package io.github.fatimazza.footballclub.home
+package io.github.fatimazza.footballclub.teamsfragment
 
 import android.content.Context
 import android.os.Bundle
