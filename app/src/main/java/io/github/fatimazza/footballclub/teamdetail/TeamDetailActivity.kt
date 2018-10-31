@@ -14,6 +14,7 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.google.gson.Gson
+import com.squareup.picasso.Picasso
 import io.github.fatimazza.footballclub.R
 import io.github.fatimazza.footballclub.R.color.colorAccent
 import io.github.fatimazza.footballclub.R.color.colorPrimaryDark
@@ -22,6 +23,7 @@ import io.github.fatimazza.footballclub.networking.ApiRepository
 import io.github.fatimazza.footballclub.utils.invisible
 import io.github.fatimazza.footballclub.utils.visible
 import org.jetbrains.anko.*
+import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
@@ -48,6 +50,9 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
 
         initPresenter()
         requestDataTeamDetail()
+        swipeRefresh.onRefresh {
+            requestDataTeamDetail()
+        }
     }
 
     private fun getIntentExtra() {
@@ -143,7 +148,16 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
     }
 
     override fun showTeamDetail(data: List<Team>) {
-        //display data on UI
+
+        team = Team(data[0].teamId, data[0].teamName, data[0].teamBadge)
+        swipeRefresh.isRefreshing = false
+
+        Picasso.get().load(data[0].teamBadge).into(teamBadge)
+        teamName.text = data[0].teamName
+        teamDescription.text = data[0].teamDescription
+        teamFormedYear.text = data[0].teamFormedYear
+        teamStadium.text = data[0].teamStadium
+        
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
