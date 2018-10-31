@@ -7,7 +7,7 @@ import io.github.fatimazza.footballclub.networking.TheSportDBApi
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class MainPresenter(private val view: MainView,
+class MainPresenter(private val view: TeamsView,
                     private val apiRepository: ApiRepository,
                     private val gson: Gson) {
 

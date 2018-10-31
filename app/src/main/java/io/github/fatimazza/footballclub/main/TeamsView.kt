@@ -2,7 +2,7 @@ package io.github.fatimazza.footballclub.main
 
 import io.github.fatimazza.footballclub.model.Team
 
-interface MainView {
+interface TeamsView {
 
     fun showLoading()
     fun hideLoading()

@@ -19,7 +19,7 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : AppCompatActivity(), TeamsView {
 
     private lateinit var listTeam: RecyclerView
     private lateinit var progressBar: ProgressBar
