@@ -13,13 +13,33 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        bottom_navigation.setOnNavigationItemReselectedListener {
+        bottom_navigation.setOnNavigationItemSelectedListener {
             item -> when(item.itemId) {
-                teams -> {}
-                favorites -> {}
+                teams -> { loadTeamsFragment(savedInstanceState) }
+                favorites -> { loadFavoritesFragment(savedInstanceState) }
             }
             true
         }
-        bottom_navigation.selectedItemId = teams
+        bottom_navigation.selectedItemId = favorites
+    }
+
+    private fun loadTeamsFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.main_container, TeamsFragment(),
+                            TeamsFragment::class.java.simpleName)
+                    .commit()
+        }
+    }
+
+    private fun loadFavoritesFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.main_container, FavoritesFragment(),
+                            FavoritesFragment::class.java.simpleName)
+                    .commit()
+        }
     }
 }
