@@ -13,10 +13,12 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import com.google.gson.Gson
 import io.github.fatimazza.footballclub.R
 import io.github.fatimazza.footballclub.R.color.colorAccent
 import io.github.fatimazza.footballclub.R.color.colorPrimaryDark
 import io.github.fatimazza.footballclub.model.Team
+import io.github.fatimazza.footballclub.networking.ApiRepository
 import io.github.fatimazza.footballclub.utils.invisible
 import io.github.fatimazza.footballclub.utils.visible
 import org.jetbrains.anko.*
@@ -33,12 +35,33 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
     private lateinit var teamStadium: TextView
     private lateinit var teamDescription: TextView
 
+    private lateinit var presenter: TeamDetailPresenter
+    private lateinit var team: Team
+    private lateinit var id:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        TeamDetailUI().setContentView(this)
 
+        TeamDetailUI().setContentView(this)
+        setupActionBar()
+
+        initPresenter()
+        requestDataTeamDetail()
+    }
+
+    private fun setupActionBar() {
         supportActionBar?.title = getString(R.string.team_detail)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun initPresenter() {
+        val request = ApiRepository()
+        val gson = Gson()
+        presenter = TeamDetailPresenter(this, request, gson)
+    }
+
+    private fun requestDataTeamDetail() {
+        presenter.getTeamDetail(id)
     }
 
     class TeamDetailUI: AnkoComponent<TeamDetailActivity> {
