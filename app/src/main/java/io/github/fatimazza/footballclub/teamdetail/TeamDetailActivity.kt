@@ -16,10 +16,13 @@ import android.widget.TextView
 import io.github.fatimazza.footballclub.R
 import io.github.fatimazza.footballclub.R.color.colorAccent
 import io.github.fatimazza.footballclub.R.color.colorPrimaryDark
+import io.github.fatimazza.footballclub.model.Team
+import io.github.fatimazza.footballclub.utils.invisible
+import io.github.fatimazza.footballclub.utils.visible
 import org.jetbrains.anko.*
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
-class TeamDetailActivity : AppCompatActivity() {
+class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
 
     private lateinit var progressBar: ProgressBar
     private lateinit var swipeRefresh: SwipeRefreshLayout
@@ -100,6 +103,18 @@ class TeamDetailActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun showLoading() {
+        progressBar.visible()
+    }
+
+    override fun hideLoading() {
+        progressBar.invisible()
+    }
+
+    override fun showTeamDetail(data: List<Team>) {
+        //display data on UI
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
