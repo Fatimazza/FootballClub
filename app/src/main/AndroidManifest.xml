@@ -18,8 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".teamdetail.TeamDetailActivity">
-            
+        <activity
+            android:name=".teamdetail.TeamDetailActivity"
+            android:parentActivityName=".home.HomeActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".home.HomeActivity" />
         </activity>
     </application>
 
