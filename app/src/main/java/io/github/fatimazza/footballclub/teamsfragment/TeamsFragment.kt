@@ -14,6 +14,7 @@ import com.google.gson.Gson
 import io.github.fatimazza.footballclub.R
 import io.github.fatimazza.footballclub.model.Team
 import io.github.fatimazza.footballclub.networking.ApiRepository
+import io.github.fatimazza.footballclub.teamdetail.TeamDetailActivity
 import io.github.fatimazza.footballclub.utils.invisible
 import io.github.fatimazza.footballclub.utils.visible
 import org.jetbrains.anko.*
@@ -86,7 +87,7 @@ class TeamsFragment: Fragment(), TeamsView {
     }
 
     private fun initAdapter() {
-        adapter = TeamsAdapter(teams)
+        adapter = TeamsAdapter(teams) { teamItem: Team -> teamItemClicked(teamItem)}
         listTeam.adapter = adapter
     }
 
@@ -113,6 +114,10 @@ class TeamsFragment: Fragment(), TeamsView {
         swipeRefresh.onRefresh {
             presenter.getTeamList(leagueName)
         }
+    }
+
+    private fun teamItemClicked(teamItem: Team) {
+        ctx.startActivity<TeamDetailActivity>(getString(R.string.intent_id) to teamItem.teamId)
     }
 
     override fun showLoading() {
