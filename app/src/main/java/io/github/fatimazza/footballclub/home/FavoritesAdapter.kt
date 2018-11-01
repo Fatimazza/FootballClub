@@ -41,13 +41,14 @@ class TeamUI: AnkoComponent<ViewGroup> {
 
                 imageView {
                     id = team_badge
-                    backgroundColor = Color.GRAY
+                    backgroundColor = Color.TRANSPARENT
                 }.lparams(width = dip(50), height = dip(50))
 
                 textView {
                     id = team_name
                     textSize = 16f
                     text = ctx.getText(R.string.team_detail)
+                    textColor = resources.getColor(R.color.colorPrimaryDark)
                 }.lparams{
                     margin = dip(15)
                 }
