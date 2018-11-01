@@ -1,18 +1,18 @@
 package io.github.fatimazza.footballclub.home
 
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.squareup.picasso.Picasso
+import io.github.fatimazza.footballclub.R
 import io.github.fatimazza.footballclub.R.id.team_badge
 import io.github.fatimazza.footballclub.R.id.team_name
 import io.github.fatimazza.footballclub.database.Favorite
-import org.jetbrains.anko.AnkoComponent
-import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.find
-import org.jetbrains.anko.linearLayout
+import org.jetbrains.anko.*
 
 class FavoritesAdapter(private val favorite: List<Favorite>)
     : RecyclerView.Adapter<FavoriteViewHolder>() {
@@ -32,7 +32,26 @@ class FavoritesAdapter(private val favorite: List<Favorite>)
 class TeamUI: AnkoComponent<ViewGroup> {
     override fun createView(ui: AnkoContext<ViewGroup>): View {
         return with(ui) {
-            linearLayout {  }
+            linearLayout {
+
+                lparams(width = matchParent, height = wrapContent)
+                padding = dip(16)
+                orientation = LinearLayout.HORIZONTAL
+
+                imageView {
+                    id = team_badge
+                    backgroundColor = Color.GRAY
+                }.lparams(width = dip(50), height = dip(50))
+
+                textView {
+                    id = team_name
+                    textSize = 16f
+                    text = ctx.getText(R.string.team_detail)
+                }.lparams{
+                    margin = dip(15)
+                }
+
+            }
         }
     }
 }
