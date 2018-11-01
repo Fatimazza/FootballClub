@@ -21,7 +21,7 @@ class HomeActivity : AppCompatActivity() {
             }
             true
         }
-        bottom_navigation.selectedItemId = favorites
+        bottom_navigation.selectedItemId = teams
     }
 
     private fun loadTeamsFragment(savedInstanceState: Bundle?) {
