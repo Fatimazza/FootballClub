@@ -2,17 +2,41 @@ package io.github.fatimazza.footballclub.database
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import org.jetbrains.anko.db.ManagedSQLiteOpenHelper
+import org.jetbrains.anko.db.*
 
 class MyDatabaseOpenHelper(ctx: Context)
     : ManagedSQLiteOpenHelper(ctx, "FavoriteTeam.db", null, 1) {
-    
-    override fun onCreate(p0: SQLiteDatabase?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+    companion object {
+
+        private var instance: MyDatabaseOpenHelper? = null
+
+        @Synchronized
+        fun getInstance(ctx: Context): MyDatabaseOpenHelper {
+            if (instance == null) {
+                instance = MyDatabaseOpenHelper(ctx.applicationContext)
+            }
+            return instance as MyDatabaseOpenHelper
+        }
+
     }
 
-    override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onCreate(db: SQLiteDatabase) {
+        // create Tables
+        db.createTable(Favorite.TABLE_FAVORITE, true,
+                Favorite.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
+                Favorite.TEAM_ID to TEXT + UNIQUE,
+                Favorite.TEAM_NAME to TEXT,
+                Favorite.TEAM_BADGE to TEXT)
+    }
+
+    override fun onUpgrade(db: SQLiteDatabase, p1: Int, p2: Int) {
+        // upgrade Tables
+        db.dropTable(Favorite.TABLE_FAVORITE, true)
     }
 
 }
+
+// Access property for Context
+val Context.database: MyDatabaseOpenHelper
+    get() = MyDatabaseOpenHelper.getInstance(applicationContext)
