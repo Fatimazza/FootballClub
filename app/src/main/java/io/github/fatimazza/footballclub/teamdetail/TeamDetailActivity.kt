@@ -7,6 +7,7 @@ import android.support.v4.app.NavUtils
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.view.Gravity
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
@@ -19,13 +20,19 @@ import io.github.fatimazza.footballclub.R
 import io.github.fatimazza.footballclub.R.color.colorAccent
 import io.github.fatimazza.footballclub.R.color.colorPrimaryDark
 import io.github.fatimazza.footballclub.R.id.add_to_favorite
+import io.github.fatimazza.footballclub.R.menu.detail_menu
+import io.github.fatimazza.footballclub.database.Favorite
+import io.github.fatimazza.footballclub.database.database
 import io.github.fatimazza.footballclub.model.Team
 import io.github.fatimazza.footballclub.networking.ApiRepository
 import io.github.fatimazza.footballclub.utils.invisible
 import io.github.fatimazza.footballclub.utils.visible
 import org.jetbrains.anko.*
+import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
+import java.sql.SQLClientInfoException
 
 class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
 
@@ -161,6 +168,26 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
         
     }
 
+    private fun addToFavorite() {
+        try {
+            database.use {
+                insert(Favorite.TABLE_FAVORITE,
+                        Favorite.TEAM_ID to team.teamId,
+                        Favorite.TEAM_NAME to team.teamName,
+                        Favorite.TEAM_BADGE to team.teamBadge)
+            }
+            snackbar(swipeRefresh, getString(R.string.favorite_added)).show()
+        }
+        catch (e: SQLClientInfoException) {
+            snackbar(swipeRefresh, e.localizedMessage).show()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(detail_menu, menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
@@ -168,6 +195,7 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
                 true
             }
             add_to_favorite -> {
+                addToFavorite()
                 true
             }
             else -> super.onOptionsItemSelected(item)
