@@ -13,8 +13,9 @@ import io.github.fatimazza.footballclub.R.id.team_badge
 import io.github.fatimazza.footballclub.R.id.team_name
 import io.github.fatimazza.footballclub.database.Favorite
 import org.jetbrains.anko.*
+import org.jetbrains.anko.sdk25.coroutines.onClick
 
-class FavoritesAdapter(private val favorite: List<Favorite>)
+class FavoritesAdapter(private val favorite: List<Favorite>, private val listener: (Favorite) -> Unit)
     : RecyclerView.Adapter<FavoriteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
@@ -23,7 +24,7 @@ class FavoritesAdapter(private val favorite: List<Favorite>)
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
-        holder.bindItem(favorite[position])
+        holder.bindItem(favorite[position], listener)
     }
 
     override fun getItemCount(): Int = favorite.size
@@ -61,9 +62,10 @@ class FavoriteViewHolder(view: View): RecyclerView.ViewHolder(view) {
     private val teamBadge: ImageView = view.find(team_badge)
     private val teamName: TextView = view.find(team_name)
 
-    fun bindItem(favorite: Favorite) {
+    fun bindItem(favorite: Favorite, listener: (Favorite) -> Unit) {
         Picasso.get().load(favorite.teamBadge).into(teamBadge)
         teamName.text = favorite.teamName
+        itemView.onClick { listener(favorite) }
     }
 
 }
