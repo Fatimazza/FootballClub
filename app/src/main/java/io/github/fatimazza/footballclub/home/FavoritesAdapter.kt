@@ -9,21 +9,31 @@ import com.squareup.picasso.Picasso
 import io.github.fatimazza.footballclub.R.id.team_badge
 import io.github.fatimazza.footballclub.R.id.team_name
 import io.github.fatimazza.footballclub.database.Favorite
+import org.jetbrains.anko.AnkoComponent
+import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
+import org.jetbrains.anko.linearLayout
 
-class FavoritesAdapter()
+class FavoritesAdapter(private val favorite: List<Favorite>)
     : RecyclerView.Adapter<FavoriteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return FavoriteViewHolder(TeamUI().createView(
+                AnkoContext.Companion.create(parent.context, parent)))
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        holder.bindItem(favorite[position])
     }
 
-    override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getItemCount(): Int = favorite.size
+}
+
+class TeamUI: AnkoComponent<ViewGroup> {
+    override fun createView(ui: AnkoContext<ViewGroup>): View {
+        return with(ui) {
+            linearLayout {  }
+        }
     }
 }
 
