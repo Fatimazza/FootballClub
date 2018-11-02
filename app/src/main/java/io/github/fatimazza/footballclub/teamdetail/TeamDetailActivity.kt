@@ -65,6 +65,7 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
         setupActionBar()
         getIntentExtra()
 
+        favoriteState()
         initPresenter()
         requestDataTeamDetail()
         swipeRefresh.onRefresh {
@@ -236,7 +237,9 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
                 true
             }
             add_to_favorite -> {
-                addToFavorite()
+                if (isFavorite) removeFromFavorite() else addToFavorite()
+                isFavorite = !isFavorite
+                setFavoriteIcon()
                 true
             }
             else -> super.onOptionsItemSelected(item)
