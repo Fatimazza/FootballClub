@@ -30,8 +30,10 @@ import io.github.fatimazza.footballclub.networking.ApiRepository
 import io.github.fatimazza.footballclub.utils.invisible
 import io.github.fatimazza.footballclub.utils.visible
 import org.jetbrains.anko.*
+import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
@@ -210,6 +212,16 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
         else
             menuItem?.getItem(0)?.icon =
                     ContextCompat.getDrawable(this, ic_add_to_favorites)
+    }
+
+    private fun favoriteState() {
+        database.use {
+            val result = select(Favorite.TABLE_FAVORITE)
+                    .whereArgs("(TEAM_ID = {id})",
+                            "id" to id)
+            val favorite = result.parseList(classParser<Favorite>())
+            if (!favorite.isEmpty()) isFavorite = true
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
