@@ -19,6 +19,8 @@ import com.squareup.picasso.Picasso
 import io.github.fatimazza.footballclub.R
 import io.github.fatimazza.footballclub.R.color.colorAccent
 import io.github.fatimazza.footballclub.R.color.colorPrimaryDark
+import io.github.fatimazza.footballclub.R.drawable.ic_add_to_favorites
+import io.github.fatimazza.footballclub.R.drawable.ic_added_to_favorites
 import io.github.fatimazza.footballclub.R.id.add_to_favorite
 import io.github.fatimazza.footballclub.R.menu.detail_menu
 import io.github.fatimazza.footballclub.database.Favorite
@@ -47,8 +49,12 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
     private lateinit var teamDescription: TextView
 
     private lateinit var presenter: TeamDetailPresenter
+
     private lateinit var team: Team
     private lateinit var id:String
+    private var isFavorite: Boolean = false
+
+    private var menuItem: Menu? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -195,6 +201,15 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
         } catch (e: SQLClientInfoException) {
             snackbar(swipeRefresh, e.localizedMessage).show()
         }
+    }
+
+    private fun setFavoriteIcon() {
+        if (isFavorite)
+            menuItem?.getItem(0)?.icon =
+                    ContextCompat.getDrawable(this, ic_added_to_favorites)
+        else
+            menuItem?.getItem(0)?.icon =
+                    ContextCompat.getDrawable(this, ic_add_to_favorites)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
