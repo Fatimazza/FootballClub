@@ -5,6 +5,7 @@ import android.os.Bundle
 import io.github.fatimazza.footballclub.R
 import io.github.fatimazza.footballclub.R.id.favorites
 import io.github.fatimazza.footballclub.R.id.teams
+import io.github.fatimazza.footballclub.favoritesfragment.FavoritesFragment
 import io.github.fatimazza.footballclub.teamsfragment.TeamsFragment
 import kotlinx.android.synthetic.main.activity_home.*
 

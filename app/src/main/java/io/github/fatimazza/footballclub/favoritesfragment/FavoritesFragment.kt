@@ -1,4 +1,4 @@
-package io.github.fatimazza.footballclub.home
+package io.github.fatimazza.footballclub.favoritesfragment
 
 import android.content.Context
 import android.os.Bundle
@@ -33,7 +33,7 @@ class FavoritesFragment: Fragment(), AnkoComponent<Context> {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        adapter = FavoritesAdapter(favorites){
+        adapter = FavoritesAdapter(favorites) {
             ctx.startActivity<TeamDetailActivity>(
                     getString(R.string.intent_id) to "${it.teamId}")
         }

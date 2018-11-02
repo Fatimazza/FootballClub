@@ -1,4 +1,4 @@
-package io.github.fatimazza.footballclub.home
+package io.github.fatimazza.footballclub.favoritesfragment
 
 import android.graphics.Color
 import android.support.v7.widget.RecyclerView
@@ -20,7 +20,7 @@ class FavoritesAdapter(private val favorite: List<Favorite>, private val listene
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         return FavoriteViewHolder(TeamUI().createView(
-                AnkoContext.Companion.create(parent.context, parent)))
+                AnkoContext.create(parent.context, parent)))
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
