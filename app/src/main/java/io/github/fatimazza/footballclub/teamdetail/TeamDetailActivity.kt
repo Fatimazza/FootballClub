@@ -227,6 +227,8 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(detail_menu, menu)
+        menuItem = menu
+        setFavoriteIcon()
         return true
     }
 
