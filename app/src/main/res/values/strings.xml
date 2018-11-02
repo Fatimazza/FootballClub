@@ -8,6 +8,7 @@
     <string name="intent_id">id</string>
 
     <string name="favorite_added">Added to favorite</string>
+    <string name="favorite_removed">Removed from favorite</string>
 
     <array name="league">
         <item>English Premier League</item>

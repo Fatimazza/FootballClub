@@ -28,6 +28,7 @@ import io.github.fatimazza.footballclub.networking.ApiRepository
 import io.github.fatimazza.footballclub.utils.invisible
 import io.github.fatimazza.footballclub.utils.visible
 import org.jetbrains.anko.*
+import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.support.v4.onRefresh
@@ -179,6 +180,19 @@ class TeamDetailActivity : AppCompatActivity(), TeamDetailView {
             snackbar(swipeRefresh, getString(R.string.favorite_added)).show()
         }
         catch (e: SQLClientInfoException) {
+            snackbar(swipeRefresh, e.localizedMessage).show()
+        }
+    }
+
+    private fun removeFromFavorite() {
+        try {
+            database.use {
+                delete(Favorite.TABLE_FAVORITE,
+                        "(TEAM_ID = {id})",
+                        "id" to id)
+            }
+            snackbar(swipeRefresh, getString(R.string.favorite_removed)).show()
+        } catch (e: SQLClientInfoException) {
             snackbar(swipeRefresh, e.localizedMessage).show()
         }
     }
