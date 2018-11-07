@@ -4,10 +4,11 @@ import com.google.gson.Gson
 import io.github.fatimazza.footballclub.model.TeamResponse
 import io.github.fatimazza.footballclub.networking.ApiRepository
 import io.github.fatimazza.footballclub.networking.TheSportDBApi
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.launch
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
+import org.jetbrains.anko.coroutines.experimental.bg
 
 class TeamsPresenter(private val view: TeamsView,
                      private val apiRepository: ApiRepository,
@@ -21,16 +22,17 @@ class TeamsPresenter(private val view: TeamsView,
         }
 
         view.showLoading()
-        doAsync {
-            val data = gson
-                    .fromJson(apiRepository.doRequest(
-                            TheSportDBApi.getTeams(league)),
-                            TeamResponse::class.java)
-            uiThread {
-                view.hideLoading()
-                view.showTeamList(data.teams)
+
+        async(UI) {
+            val data = bg {
+                gson.fromJson(apiRepository.doRequest(
+                                TheSportDBApi.getTeams(league)),
+                                TeamResponse::class.java)
             }
+            view.showTeamList(data.await().teams)
+            view.hideLoading()
         }
+
     }
 }
 
