@@ -2,18 +2,29 @@ package io.github.fatimazza.footballclub.networking
 
 import org.junit.Test
 
-import org.junit.Assert.*
+import org.junit.Before
+import org.mockito.Mock
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
+import org.mockito.MockitoAnnotations
 
 class ApiRepositoryTest {
 
+    @Before
+    fun setUp() {
+        MockitoAnnotations.initMocks(this)
+    }
+
+    @Mock
+    private
+    lateinit var apiRepository: ApiRepository
+
     @Test
     fun testDoRequest() {
-        val apiRepository = mock(ApiRepository::class.java)
+        apiRepository = mock(ApiRepository::class.java)
         val url = "https://www.thesportsdb.com/api/v1/json/1/search_all_teams.php?l=German%20Bundesliga"
 
         apiRepository.doRequest(url)
-        verify(apiRepository.doRequest(url))
+        verify(apiRepository).doRequest(url)
     }
 }
