@@ -13,5 +13,5 @@ fun View.invisible() {
 }
 
 fun formatToSimpleString(date: Date?): String? = with(date ?: Date()){
-    SimpleDateFormat("EEE, dd MM yyy").format(this)
+    SimpleDateFormat("EEE, dd MMM yyy").format(this)
 }
