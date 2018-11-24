@@ -1,8 +1,8 @@
 package io.github.fatimazza.footballclub.utils
 
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlinx.coroutines.experimental.ExperimentalCoroutinesApi
-import kotlin.coroutines.experimental.CoroutineContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlin.coroutines.CoroutineContext
 
 class TestContextProvider : CoroutineContextProvider() {
     @ExperimentalCoroutinesApi

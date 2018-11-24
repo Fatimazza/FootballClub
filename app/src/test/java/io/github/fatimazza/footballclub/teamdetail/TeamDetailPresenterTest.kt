@@ -6,8 +6,8 @@ import io.github.fatimazza.footballclub.model.TeamResponse
 import io.github.fatimazza.footballclub.networking.ApiRepository
 import io.github.fatimazza.footballclub.networking.TheSportDBApi
 import io.github.fatimazza.footballclub.utils.TestContextProvider
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock

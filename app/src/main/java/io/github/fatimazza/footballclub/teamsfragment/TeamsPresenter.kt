@@ -5,9 +5,9 @@ import io.github.fatimazza.footballclub.model.TeamResponse
 import io.github.fatimazza.footballclub.networking.ApiRepository
 import io.github.fatimazza.footballclub.networking.TheSportDBApi
 import io.github.fatimazza.footballclub.utils.CoroutineContextProvider
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class TeamsPresenter(private val view: TeamsView,
                      private val apiRepository: ApiRepository,

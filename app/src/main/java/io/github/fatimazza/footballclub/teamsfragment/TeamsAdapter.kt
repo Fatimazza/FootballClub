@@ -12,7 +12,7 @@ import io.github.fatimazza.footballclub.R.id.team_badge
 import io.github.fatimazza.footballclub.R.id.team_name
 import io.github.fatimazza.footballclub.model.Team
 import org.jetbrains.anko.*
-import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class TeamsAdapter(private val teams: List<Team>, private val listener:(Team) -> Unit)
     : RecyclerView.Adapter<TeamViewHolder>() {

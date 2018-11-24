@@ -1,8 +1,8 @@
 package io.github.fatimazza.footballclub.utils
 
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlin.coroutines.experimental.CoroutineContext
+import kotlinx.coroutines.Dispatchers
+import kotlin.coroutines.CoroutineContext
 
 open class CoroutineContextProvider {
-    open val main: CoroutineContext by lazy { Dispatchers.Unconfined }
+    open val main: CoroutineContext by lazy { Dispatchers.Main }
 }

@@ -13,7 +13,7 @@ import io.github.fatimazza.footballclub.R.id.team_badge
 import io.github.fatimazza.footballclub.R.id.team_name
 import io.github.fatimazza.footballclub.database.Favorite
 import org.jetbrains.anko.*
-import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class FavoritesAdapter(private val favorite: List<Favorite>, private val listener: (Favorite) -> Unit)
     : RecyclerView.Adapter<FavoriteViewHolder>() {
