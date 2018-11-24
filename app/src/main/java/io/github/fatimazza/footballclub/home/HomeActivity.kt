@@ -8,12 +8,16 @@ import io.github.fatimazza.footballclub.R.id.teams
 import io.github.fatimazza.footballclub.favoritesfragment.FavoritesFragment
 import io.github.fatimazza.footballclub.teamsfragment.TeamsFragment
 import kotlinx.android.synthetic.main.activity_home.*
+import android.os.StrictMode
 
 class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
 
         bottom_navigation.setOnNavigationItemSelectedListener {
             item -> when(item.itemId) {
