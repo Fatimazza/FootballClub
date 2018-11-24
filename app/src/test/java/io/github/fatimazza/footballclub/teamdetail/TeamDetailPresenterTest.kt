@@ -43,7 +43,7 @@ class TeamDetailPresenterTest {
 
         GlobalScope.launch {
             `when`(gson.fromJson(apiRepository
-                    .doRequest(TheSportDBApi.getTeamDetail(teamId))  ,
+                    .doRequest(TheSportDBApi.getTeamDetail(teamId)),
                     TeamResponse::class.java
             )).thenReturn(response)
 
