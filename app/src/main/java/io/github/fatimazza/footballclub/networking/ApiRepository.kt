@@ -1,8 +1,8 @@
-package io.github.fatimazza.footballclub.networking;
+package io.github.fatimazza.footballclub.networking
 
 import java.net.URL
 
-public class ApiRepository {
+class ApiRepository {
 
     fun doRequest(url: String): String {
         return URL(url).readText()
