@@ -1,4 +1,4 @@
-package io.github.fatimazza.footballclub.teamsfragment
+package io.github.fatimazza.footballclub.teamdetail
 
 import com.google.gson.Gson
 import io.github.fatimazza.footballclub.model.Team
@@ -8,52 +8,49 @@ import io.github.fatimazza.footballclub.networking.TheSportDBApi
 import io.github.fatimazza.footballclub.utils.TestContextProvider
 import kotlinx.coroutines.experimental.GlobalScope
 import kotlinx.coroutines.experimental.launch
-import org.junit.Test
-
 import org.junit.Before
+import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 
-class TeamsPresenterTest {
+
+class TeamDetailPresenterTest {
 
     @Mock
-    private
-    lateinit var view: TeamsView
+    private lateinit var view: TeamDetailView
 
     @Mock
-    private
-    lateinit var gson: Gson
+    private lateinit var gson: Gson
 
     @Mock
-    private
-    lateinit var apiRepository: ApiRepository
+    private lateinit var apiRepository: ApiRepository
 
-    private lateinit var presenter: TeamsPresenter
+    private lateinit var presenter: TeamDetailPresenter
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        presenter = TeamsPresenter(view, apiRepository, gson, TestContextProvider())
+        presenter = TeamDetailPresenter(view, apiRepository, gson, TestContextProvider())
     }
 
     @Test
-    fun testGetTeamList() {
+    fun testGetTeamDetail() {
         val teams: MutableList<Team> = mutableListOf()
         val response = TeamResponse(teams)
-        val league = "English Premiere League"
+        val teamId = "133604"
 
         GlobalScope.launch {
             `when`(gson.fromJson(apiRepository
-                    .doRequest(TheSportDBApi.getTeams(league))  ,
+                    .doRequest(TheSportDBApi.getTeamDetail(teamId))  ,
                     TeamResponse::class.java
             )).thenReturn(response)
 
-            presenter.getTeamList(league)
+            presenter.getTeamDetail(teamId)
 
             Mockito.verify(view).showLoading()
-            Mockito.verify(view).showTeamList(teams)
+            Mockito.verify(view).showTeamDetail(teams)
             Mockito.verify(view).hideLoading()
         }
     }
